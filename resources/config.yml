@@ -1,0 +1,13 @@
+# Config file by Px1L
+
+pos:
+  # void detection
+  minY: -10
+
+  # automatic safe spawn?
+  safe_spawn: true
+
+  # Coords of spawn where you want to teleport [If safe spawn enabled leave it as it is]
+  x: 0
+  y: 0
+  z: 0

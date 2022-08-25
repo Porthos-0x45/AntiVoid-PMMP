@@ -1,0 +1,64 @@
+---
+name: AntiVoid
+main: Pixel\AntiVoid\Core\Main
+version: 0.1.0
+api:
+  - 4.8.0
+
+author: Px1L
+description: Doesnt kill you when you fall into void
+load: POSTWORLD
+
+commands:
+  gms:
+    description: "Switch gamemode to Survival"
+    usage: "/gms [player]"
+    permission: gms.command
+
+  gmc:
+    description: "Switch gamemode to creative"
+    usage: "/gms [player]"
+    permission: gmc.command
+
+  gma:
+    description: "Switch gamemode to adventure"
+    usage: "/gma [player]"
+    permission: gma.command
+
+  gmspc:
+    description: "Switch gamemode to Spectator"
+    usage: "/gms [player]"
+    permission: gmspc.command
+
+permissions:
+  gms.other:
+    default: op
+    description: "allows giving gms to others"
+    children:
+      gms.command:
+        default: op
+        description: "gms access"
+
+  gma.other:
+    default: op
+    description: "allows giving gma to others"
+    children:
+      gma.command:
+        default: op
+        description: "gma access"
+
+  gmc.other:
+    default: op
+    description: "allows giving gmc to others"
+    children:
+      gmc.command:
+        default: op
+        description: "gmc access"
+
+  gmspc.other:
+    default: op
+    description: "allows giving gmspc to others"
+    children:
+      gmspc.command:
+        default: op
+        description: "gmspc access"
