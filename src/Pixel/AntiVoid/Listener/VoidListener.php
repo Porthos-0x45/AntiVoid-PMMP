@@ -23,11 +23,11 @@ class VoidListener implements Listener
         $player = $event->getPlayer();
         $level = $plugin->$config->get("world");
         
-        if ($player.getY() < (double)$plugin->config->get("pos.minY"))
+        if ($player.getY() < (double)$plugin->config->getNested("pos")["minY"])
         {
-            if (!($plugin->config->get("pos.safe_spawn")))
+            if (!($plugin->config->getNested("pos")["safe_spawn"]))
             {
-                $player.teleport((double)$plugin->config->get("pos.x"),(double)$plugin->config->get("pos.y"), (double)$plugin->config->get("pos.z"), $level);
+                $player.teleport((double)$plugin->config->getNested("pos")["x"],(double)$plugin->config->getNested("pos")["y"], (double)$plugin->config->get("pos")["z"], $level);
             }
             else 
             {
