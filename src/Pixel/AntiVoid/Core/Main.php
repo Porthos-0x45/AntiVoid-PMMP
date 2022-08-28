@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Pixel\AntiVoid\Core;
 
-use pocketmine\event\Listener;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\utils\TextFormat;
@@ -32,8 +31,8 @@ class Main extends PluginBase
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
     {
-        $player = $this->getServer->getPlayer($sender->getName());
-        $serv = $this->getServer;
+        $player = $this->getServer()->getPlayer($sender->getName());
+        $serv = $this->getServer();
         $nocmd = TextFormat::RED . "You do not have permission to use this command";
         $notother = TextFormat::RED . "You do not have permission to change the gamemode of other players";
 
