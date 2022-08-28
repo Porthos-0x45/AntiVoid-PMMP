@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Pixel\AntiVoid\Listener;
 
-use pocketmine\level\Level;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 use Pixel\AntiVoid\Core\Main;
+use pocketmine\math\Vector3;
 
 class VoidListener implements Listener
 {
-    private $plugin;
+    public $plugin;
 
     public function __construct(Main $plugin)
     {
@@ -20,20 +20,15 @@ class VoidListener implements Listener
 
     public function onPlayerMove(PlayerMoveEvent $event)
     {
-        $player = $event->getPlayer();
-        $level = $plugin->$config->get("world");
-        
-        if ($player.getY() < (double)$plugin->config->getNested("pos")["minY"])
-        {
-            if (!($plugin->config->getNested("pos")["safe_spawn"]))
-            {
-                $player.teleport((double)$plugin->config->getNested("pos")["x"],(double)$plugin->config->getNested("pos")["y"], (double)$plugin->config->get("pos")["z"], $level);
-            }
-            else 
-            {
-                $player.teleport($level->getSafeSpawn());
+        $player = $event->getPlayer;
+        $level = $plugin->config->get("world");
+
+        if ($player->getY() < (float)$plugin->config->getNested("pos")["minY"]) {
+            if (!($plugin->config->getNested("pos")["safe_spawn"])) {
+                $player->teleport(new Vector3((float)$plugin->config->getNested("pos")["x"], (float)$plugin->config->getNested("pos")["y"], (float)$plugin->config->get("pos")["z"], $level));
+            } else {
+                $player->teleport($level->getSafeSpawn());
             }
         }
     }
 }
-?>
