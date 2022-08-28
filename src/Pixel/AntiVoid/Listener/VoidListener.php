@@ -8,31 +8,32 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerMoveEvent;
 use Pixel\AntiVoid\Core\Main;
 use pocketmine\math\Vector3;
+use pocketmine\world\Position;
+use pocketmine\world\World;
 
 class VoidListener implements Listener
 {
-    public $plugin;
-
-    public function __construct(Main $plugin)
+    public function __construct(private Main $plugin)
     {
-        $this->plugin = $plugin;
     }
 
-    public function onPlayerMove(PlayerMoveEvent $event)
+    public function onPlayerMove(PlayerMoveEvent $event): void
     {
         $plugin = $this->plugin;
-        $player = $event->getPlayer;
+        $player = $event->getPlayer();
         $level = $plugin->config->get("world");
 
-        if ($player->getY() < (float)$plugin->config->getNested("pos")["minY"]) {
+
+        if ($player->getPosition()->y < (float)$plugin->config->getNested("pos")["minY"]) {
             if (!($plugin->config->getNested("pos")["safe_spawn"])) {
-                $player->teleport(new Vector3(
+                $player->teleport(new Position(
                     (float)$plugin->config->getNested("pos")["x"],
                     (float)$plugin->config->getNested("pos")["y"],
-                    (float)$plugin->config->get("pos")["z"]
-                ), $level);
+                    (float)$plugin->config->get("pos")["z"],
+                    $level
+                ));
             } else {
-                $player->teleport($level->getSafeSpawn());
+                $player->teleport($player->getWorld()->getSafeSpawn());
             }
         }
     }

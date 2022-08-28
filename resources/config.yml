@@ -1,7 +1,5 @@
 # Config file by Px1L
 
-world: "World"
-
 pos:
   # void detection
   minY: -10
