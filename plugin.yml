@@ -3,11 +3,10 @@ name: AntiVoid
 main: Pixel\AntiVoid\Core\Main
 version: 0.1.0
 api:
-  - 4.8.0
+  - 4.0.0
 
 author: Px1L
 description: Doesnt kill you when you fall into void
-load: POSTWORLD
 
 commands:
   gms:
@@ -34,31 +33,31 @@ permissions:
   gms.other:
     default: op
     description: "allows giving gms to others"
-    children:
-      gms.command:
-        default: op
-        description: "gms access"
+
+  gms.command:
+    default: op
+    description: "gms access"
 
   gma.other:
     default: op
     description: "allows giving gma to others"
-    children:
-      gma.command:
-        default: op
-        description: "gma access"
+
+  gma.command:
+    default: op
+    description: "gma access"
 
   gmc.other:
     default: op
     description: "allows giving gmc to others"
-    children:
-      gmc.command:
-        default: op
-        description: "gmc access"
+
+  gmc.command:
+    default: op
+    description: "gmc access"
 
   gmspc.other:
     default: op
     description: "allows giving gmspc to others"
-    children:
-      gmspc.command:
-        default: op
-        description: "gmspc access"
+
+  gmspc.command:
+    default: op
+    description: "gmspc access"

@@ -27,6 +27,15 @@ class Main extends PluginBase
 
         $this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
         $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+
+        if ($config->get("pos") == null) {
+            $config->setNested("pos.minY", -11);
+            $config->setNested("pos.safe_spawn", true);
+            $config->setNested("pos.x", 0);
+            $config->setNested("pos.y", 0);
+            $config->setNested("pos.z", 0);
+        }
+
         $this->saveDefaultConfig();
     }
 
