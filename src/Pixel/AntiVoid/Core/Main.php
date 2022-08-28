@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Pixel\AntiVoid\Core;
 
 use pocketmine\event\Listener;
@@ -20,7 +22,7 @@ class Main extends PluginBase {
 	public function onEnable() : void{
 		$this->getServer()->getLogger()->info(TextFormat::RED."I NEED SLEEEEP!!!!!!!!!!!!!");
 
-		$this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this)
+		$this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
 		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->saveDefaultConfig();
 	}
