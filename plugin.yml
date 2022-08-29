@@ -6,7 +6,7 @@ api:
   - 4.0.0
 
 author: Px1L
-description: Doesnt kill you when you fall into void
+description: Doesn't kill you when you fall into void
 
 commands:
   gms:
