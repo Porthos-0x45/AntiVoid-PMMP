@@ -20,21 +20,35 @@ class VoidListener implements Listener
     {
         $entity = $event->getEntity();
         $cause = $event->getCause();
+        $config = $this->plugin->config;
 
         if (($entity instanceof Player) && ($cause == EntityDamageEvent::CAUSE_VOID)) {
             $player = $event->getEntity();
             $plugin = $this->plugin;
-            $minY = (float)$plugin->config->getNested("spawn")["minY"];
 
+            if ($plugin->config->exists("spawn") !== null) {
+                $minY =       (float)$plugin->config->getNested("spawn")["minY"];
+                $posX =       (float)$plugin->config->getNested("spawn")["posX"];
+                $posY =       (float)$plugin->config->getNested("spawn")["posY"];
+                $posZ =       (float)$plugin->config->getNested("spawn")["posZ"];
+                $safe_spawn =        $plugin->config->getNested("spawn")["safe_spawn"];
+            } else {
+                $config->setNested("spawn.minY", -11);
+                $config->setNested("spawn.safe_spawn", true);
+                $config->setNested("spawn.posX", 0);
+                $config->setNested("spawn.posY", 0);
+                $config->setNested("spawn.posZ", 0);
+                $config->save();
+            }
             print($minY);
 
 
             if ($player->getPosition()->y < $minY) {
-                if (!($plugin->config->getNested("spawn")["safe_spawn"])) {
+                if (!($safe_spawn)) {
                     $player->teleport(new Position(
-                        (float)$plugin->config->getNested("spawn")["posX"],
-                        (float)$plugin->config->getNested("spawn")["posY"],
-                        (float)$plugin->config->getNested("spawn")["posZ"],
+                        $posX,
+                        $posY,
+                        $posZ,
                         $player->getWorld()
                     ));
                 } else {

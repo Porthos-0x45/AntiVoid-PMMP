@@ -25,18 +25,9 @@ class Main extends PluginBase
     {
         $this->getServer()->getLogger()->info(TextFormat::RED . "I NEED SLEEEEP!!!!!!!!!!!!!");
 
-        $this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
+        //$this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
         $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->saveDefaultConfig();
-
-        if ($config->exists("spawn") == false) {
-            $config->setNested("spawn.minY", -11);
-            $config->setNested("spawn.safe_spawn", true);
-            $config->setNested("spawn.posX", 0);
-            $config->setNested("spawn.posY", 0);
-            $config->setNested("spawn.posZ", 0);
-            $config->save();
-        }
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
