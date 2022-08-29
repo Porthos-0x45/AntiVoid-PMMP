@@ -5,14 +5,10 @@ declare(strict_types=1);
 namespace Pixel\AntiVoid\Listener;
 
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerMoveEvent;
 use Pixel\AntiVoid\Core\Main;
 use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\player\PlayerDeathEvent;
-use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\world\Position;
-use pocketmine\world\World;
 
 class VoidListener implements Listener
 {
@@ -28,13 +24,17 @@ class VoidListener implements Listener
         if (($entity instanceof Player) && ($cause == EntityDamageEvent::CAUSE_VOID)) {
             $player = $event->getEntity();
             $plugin = $this->plugin;
+            $minY = (float)$plugin->config->getNested("spawn")["minY"];
 
-            if ($player->getPosition()->y < (float)$plugin->config->getNested("pos")["minY"]) {
-                if (!($plugin->config->getNested("pos")["safe_spawn"])) {
+            print($minY);
+
+
+            if ($player->getPosition()->y < $minY) {
+                if (!($plugin->config->getNested("spawn")["safe_spawn"])) {
                     $player->teleport(new Position(
-                        (float)$plugin->config->getNested("pos")["x"],
-                        (float)$plugin->config->getNested("pos")["y"],
-                        (float)$plugin->config->getNested("pos")["z"],
+                        (float)$plugin->config->getNested("spawn")["posX"],
+                        (float)$plugin->config->getNested("spawn")["posY"],
+                        (float)$plugin->config->getNested("spawn")["posZ"],
                         $player->getWorld()
                     ));
                 } else {

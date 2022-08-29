@@ -29,14 +29,14 @@ class Main extends PluginBase
         $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->saveDefaultConfig();
 
-        if ($config->getAll() == NULL) {
-            $config->setNested("pos.minY", -11);
-            $config->setNested("pos.safe_spawn", true);
-            $config->setNested("pos.x", 0);
-            $config->setNested("pos.y", 0);
-            $config->setNested("pos.z", 0);
+        if ($config->exists("spawn") == false) {
+            $config->setNested("spawn.minY", -11);
+            $config->setNested("spawn.safe_spawn", true);
+            $config->setNested("spawn.posX", 0);
+            $config->setNested("spawn.posY", 0);
+            $config->setNested("spawn.posZ", 0);
+            $config->save();
         }
-        $config->save();
     }
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
