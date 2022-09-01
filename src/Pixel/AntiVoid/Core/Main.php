@@ -25,7 +25,7 @@ class Main extends PluginBase
     {
         $this->getServer()->getLogger()->info(TextFormat::RED . "I NEED SLEEEEP!!!!!!!!!!!!!");
 
-        //$this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new VoidListener($this), $this);
         $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $this->saveDefaultConfig();
     }

@@ -26,34 +26,29 @@ class VoidListener implements Listener
             $player = $event->getEntity();
             $plugin = $this->plugin;
 
-            if ($plugin->config->exists("spawn") !== null) {
-                $minY =       (float)$plugin->config->getNested("spawn")["minY"];
+            if ($plugin->config->exists("spawn") !== false) {
                 $posX =       (float)$plugin->config->getNested("spawn")["posX"];
                 $posY =       (float)$plugin->config->getNested("spawn")["posY"];
                 $posZ =       (float)$plugin->config->getNested("spawn")["posZ"];
                 $safe_spawn =        $plugin->config->getNested("spawn")["safe_spawn"];
             } else {
-                $config->setNested("spawn.minY", -11);
                 $config->setNested("spawn.safe_spawn", true);
                 $config->setNested("spawn.posX", 0);
                 $config->setNested("spawn.posY", 0);
                 $config->setNested("spawn.posZ", 0);
                 $config->save();
             }
-            print($minY);
 
 
-            if ($player->getPosition()->y < $minY) {
-                if (!($safe_spawn)) {
-                    $player->teleport(new Position(
-                        $posX,
-                        $posY,
-                        $posZ,
-                        $player->getWorld()
-                    ));
-                } else {
-                    $player->teleport($player->getWorld()->getSafeSpawn());
-                }
+            if (!($safe_spawn)) {
+                $player->teleport(new Position(
+                    $posX,
+                    $posY,
+                    $posZ,
+                    $player->getWorld()
+                ));
+            } else {
+                $player->teleport($player->getWorld()->getSafeSpawn());
             }
         }
     }
